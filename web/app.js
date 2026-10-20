@@ -43,11 +43,37 @@ async function initData() {
 
 function initUI() {
   renderSidebar(appData.modules);
+  setupTheme();
   setupLanguageSwitcher();
   setupSearch();
   setupPdfModal();
   setupKeyboardShortcuts();
   window.addEventListener('hashchange', handleRouting);
+}
+
+function setupTheme() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const savedTheme = localStorage.getItem('java_concurrency_theme') || 'light';
+  applyTheme(savedTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.body.classList.contains('theme-dark');
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+  }
+}
+
+function applyTheme(theme) {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (theme === 'dark') {
+    document.body.classList.add('theme-dark');
+    if (themeToggleBtn) themeToggleBtn.textContent = '🌙 Koyu';
+  } else {
+    document.body.classList.remove('theme-dark');
+    if (themeToggleBtn) themeToggleBtn.textContent = '☀️ Açık';
+  }
+  localStorage.setItem('java_concurrency_theme', theme);
 }
 
 // Router based on hash (#lesson-12)

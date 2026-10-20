@@ -4,6 +4,35 @@
    ============================================================================== */
 
 :root {
+  /* DEFAULT: LIGHT THEME */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --border-color: #e2e8f0;
+  --border-glow: rgba(234, 88, 12, 0.2);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  --accent-orange: #ea580c;
+  --accent-amber: #f97316;
+  --accent-gold: #d97706;
+  --accent-cyan: #0284c7;
+  --accent-blue: #2563eb;
+  --accent-violet: #7c3aed;
+  --accent-rose: #e11d48;
+  --accent-emerald: #16a34a;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Menlo', monospace;
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* OPTIONAL DARK THEME */
+body.theme-dark {
   --bg-primary: #050a14;
   --bg-secondary: #081120;
   --bg-card: rgba(13, 24, 43, 0.78);
@@ -23,11 +52,6 @@
   --accent-violet: #a855f7;
   --accent-rose: #f43f5e;
   --accent-emerald: #10b981;
-
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Menlo', monospace;
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -57,6 +81,13 @@ body {
   z-index: -1;
   pointer-events: none;
   background: 
+    radial-gradient(circle at 10% 15%, rgba(234, 88, 12, 0.07) 0%, transparent 40%),
+    radial-gradient(circle at 90% 20%, rgba(2, 132, 199, 0.05) 0%, transparent 35%),
+    radial-gradient(circle at 50% 85%, rgba(124, 58, 237, 0.04) 0%, transparent 50%);
+}
+
+body.theme-dark .bg-ambient {
+  background: 
     radial-gradient(circle at 10% 15%, rgba(249, 115, 22, 0.12) 0%, transparent 40%),
     radial-gradient(circle at 90% 20%, rgba(56, 189, 248, 0.10) 0%, transparent 35%),
     radial-gradient(circle at 50% 85%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
@@ -67,7 +98,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(8, 17, 32, 0.90);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-color);
   padding: 0.75rem 2rem;
@@ -75,6 +106,10 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
+}
+
+body.theme-dark .top-nav {
+  background: rgba(8, 17, 32, 0.90);
 }
 
 .brand-section {
@@ -96,7 +131,7 @@ body {
   font-weight: 800;
   font-size: 1.15rem;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff, #fed7aa);
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-orange));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -126,7 +161,7 @@ body {
 
 .search-input {
   width: 100%;
-  background: rgba(13, 24, 43, 0.85);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 9999px;
   padding: 0.55rem 1rem 0.55rem 2.6rem;
@@ -139,8 +174,8 @@ body {
 
 .search-input:focus {
   border-color: var(--accent-orange);
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25);
-  background: rgba(17, 31, 56, 0.95);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+  background: var(--bg-secondary);
 }
 
 .search-input::placeholder {
@@ -155,9 +190,29 @@ body {
   min-width: max-content;
 }
 
+.theme-toggle-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-orange);
+}
+
 .lang-selector {
   display: flex;
-  background: rgba(13, 24, 43, 0.9);
+  background: var(--bg-card);
   padding: 3px;
   border-radius: 8px;
   border: 1px solid var(--border-color);
@@ -238,12 +293,16 @@ body {
 /* Sidebar */
 .sidebar {
   width: 380px;
-  background: rgba(8, 17, 32, 0.7);
+  background: var(--bg-secondary);
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   backdrop-filter: blur(10px);
+}
+
+body.theme-dark .sidebar {
+  background: rgba(8, 17, 32, 0.7);
 }
 
 .sidebar-header {
@@ -282,7 +341,7 @@ body {
 .module-item {
   margin-bottom: 0.5rem;
   border-radius: 8px;
-  background: rgba(13, 24, 43, 0.45);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   overflow: hidden;
   transition: var(--transition-fast);
@@ -295,11 +354,11 @@ body {
   justify-content: space-between;
   cursor: pointer;
   user-select: none;
-  background: rgba(13, 24, 43, 0.75);
+  background: var(--bg-card);
 }
 
 .module-header:hover {
-  background: rgba(20, 36, 62, 0.85);
+  background: var(--bg-card-hover);
 }
 
 .module-title-group {
@@ -337,7 +396,7 @@ body {
   list-style: none;
   display: none;
   padding: 0.35rem 0.5rem 0.5rem 0.5rem;
-  background: rgba(6, 12, 23, 0.6);
+  background: var(--bg-card-hover);
 }
 
 .module-item.open .lesson-sublist {
@@ -362,13 +421,13 @@ body {
 }
 
 .lesson-nav-btn:hover {
-  background: rgba(148, 163, 184, 0.1);
-  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  color: var(--accent-orange);
 }
 
 .lesson-nav-btn.active {
   background: rgba(249, 115, 22, 0.16);
-  color: #fed7aa;
+  color: var(--accent-orange);
   font-weight: 700;
   border-left: 3px solid var(--accent-orange);
 }
@@ -406,13 +465,13 @@ body {
 
 /* Lesson Header Card */
 .lesson-hero {
-  background: linear-gradient(135deg, rgba(13, 24, 43, 0.85), rgba(20, 36, 62, 0.75));
-  border: 1px solid var(--border-color);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border: 1px solid #334155;
   border-radius: 14px;
   padding: 1.75rem 2rem;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
 }
 
 .lesson-hero::before {
@@ -499,6 +558,10 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+body.theme-dark .content-box {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
@@ -528,61 +591,83 @@ body {
   padding: 1.25rem 1.5rem;
 }
 
-/* 1. Diagram Box (Obsidian & Orange Accent) */
+/* 1. Diagram Box */
 .box-diagram {
   border-left: 4px solid var(--accent-orange);
+  background: #fff7ed;
+}
+
+body.theme-dark .box-diagram {
   background: #040812;
 }
 
 .box-diagram .box-header {
-  background: rgba(8, 15, 30, 0.95);
-  color: var(--accent-amber);
+  background: rgba(234, 88, 12, 0.08);
+  color: var(--accent-orange);
 }
 
 .diagram-pre {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   line-height: 1.45;
-  color: #fdba74;
+  color: #9a3412;
   overflow-x: auto;
   white-space: pre;
-  background: #02050b;
+  background: #f8fafc;
   padding: 1rem 1.25rem;
   border-radius: 8px;
-  border: 1px solid rgba(249, 115, 22, 0.2);
+  border: 1px solid #fed7aa;
+}
+
+body.theme-dark .diagram-pre {
+  color: #fdba74;
+  background: #02050b;
+  border-color: rgba(249, 115, 22, 0.2);
 }
 
 /* 2. ELI5 Metaphor Box */
 .box-eli5 {
   border-left: 4px solid var(--accent-blue);
+  background: #eff6ff;
+}
+
+body.theme-dark .box-eli5 {
   background: rgba(10, 20, 38, 0.75);
 }
 
 .box-eli5 .box-header {
-  background: rgba(15, 28, 52, 0.85);
-  color: #60a5fa;
+  background: rgba(37, 99, 235, 0.08);
+  color: #1d4ed8;
 }
 
 /* 3. Deep Dive Box */
 .box-deep {
   border-left: 4px solid var(--accent-cyan);
+  background: #f0f9ff;
+}
+
+body.theme-dark .box-deep {
   background: rgba(8, 22, 38, 0.75);
 }
 
 .box-deep .box-header {
-  background: rgba(12, 32, 54, 0.85);
-  color: #38bdf8;
+  background: rgba(2, 132, 199, 0.08);
+  color: #0369a1;
 }
 
 /* 4. Java 25 Code Box */
 .box-code {
   border-left: 4px solid var(--accent-violet);
+  background: #faf5ff;
+}
+
+body.theme-dark .box-code {
   background: #03060f;
 }
 
 .box-code .box-header {
-  background: rgba(15, 12, 32, 0.95);
-  color: #c084fc;
+  background: rgba(124, 58, 237, 0.08);
+  color: #7c3aed;
 }
 
 .code-pre-wrapper {
@@ -593,19 +678,25 @@ body {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   line-height: 1.5;
-  color: #e2e8f0;
+  color: #3b0764;
   overflow-x: auto;
   padding: 1rem 1.25rem;
-  background: #020409;
+  background: #faf5ff;
   border-radius: 8px;
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  border: 1px solid #e9d5ff;
+}
+
+body.theme-dark .code-pre {
+  color: #e2e8f0;
+  background: #020409;
+  border-color: rgba(168, 85, 247, 0.2);
 }
 
 .btn-copy-code {
   position: absolute;
   top: 0.6rem;
   right: 0.6rem;
-  background: rgba(30, 41, 59, 0.8);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
   font-size: 0.75rem;
@@ -616,31 +707,39 @@ body {
 }
 
 .btn-copy-code:hover {
-  background: rgba(249, 115, 22, 0.2);
-  color: var(--accent-orange);
+  background: var(--accent-orange);
+  color: white;
   border-color: var(--accent-orange);
 }
 
 /* 5. Warning / Hazard Box */
 .box-warning {
   border-left: 4px solid var(--accent-rose);
+  background: #fff1f2;
+}
+
+body.theme-dark .box-warning {
   background: rgba(30, 10, 18, 0.75);
 }
 
 .box-warning .box-header {
-  background: rgba(45, 12, 24, 0.85);
-  color: #fb7185;
+  background: rgba(225, 29, 72, 0.08);
+  color: #be123c;
 }
 
 /* 6. Takeaways Box */
 .box-takeaways {
   border-left: 4px solid var(--accent-emerald);
+  background: #f0fdf4;
+}
+
+body.theme-dark .box-takeaways {
   background: rgba(6, 26, 20, 0.75);
 }
 
 .box-takeaways .box-header {
-  background: rgba(9, 36, 27, 0.85);
-  color: #34d399;
+  background: rgba(22, 163, 74, 0.08);
+  color: #15803d;
 }
 
 .takeaway-list {
@@ -655,18 +754,19 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   padding: 0.5rem 0.75rem;
-  background: rgba(16, 185, 129, 0.05);
+  background: rgba(22, 163, 74, 0.06);
   border-radius: 6px;
   border-left: 2px solid var(--accent-emerald);
   font-size: 0.84rem;
 }
 
 .takeaway-tr {
-  color: #e2e8f0;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .takeaway-en {
-  color: #94a3b8;
+  color: var(--text-secondary);
 }
 
 /* Bilingual Split Columns */
@@ -685,7 +785,7 @@ body {
   display: inline-block;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #93c5fd;
+  color: var(--accent-blue);
   margin-bottom: 0.4rem;
 }
 
@@ -693,16 +793,16 @@ body {
   display: inline-block;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #a5b4fc;
+  color: var(--accent-violet);
   margin-bottom: 0.4rem;
 }
 
 .lang-column.tr-text {
-  color: #f1f5f9;
+  color: var(--text-primary);
 }
 
 .lang-column.en-text {
-  color: #cbd5e1;
+  color: var(--text-secondary);
 }
 
 /* Footer Pagination */
@@ -722,7 +822,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(12px);
   z-index: 1000;
   justify-content: center;
@@ -735,7 +835,7 @@ body {
 }
 
 .modal-card {
-  background: #081120;
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 16px;
   width: 100%;
@@ -744,6 +844,11 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+body.theme-dark .modal-card {
+  background: #081120;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
@@ -753,6 +858,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: var(--bg-card-hover);
+}
+
+body.theme-dark .modal-header {
+  background: rgba(13, 24, 43, 0.85);
 }
 
 .modal-body {
@@ -761,8 +871,8 @@ body {
 }
 
 .master-book-highlight {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(251, 146, 60, 0.08));
-  border: 1px solid rgba(249, 115, 22, 0.35);
+  background: linear-gradient(135deg, rgba(234, 88, 12, 0.12), rgba(249, 115, 22, 0.06));
+  border: 1px solid rgba(234, 88, 12, 0.35);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   display: flex;
@@ -782,9 +892,10 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  background: rgba(13, 24, 43, 0.6);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 8px;
+  color: var(--text-primary);
 }
 
 .pdf-download-list-grid {
@@ -798,7 +909,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0.6rem 0.85rem;
-  background: rgba(13, 24, 43, 0.5);
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   color: var(--text-primary);
@@ -808,7 +919,7 @@ body {
 }
 
 .pdf-lesson-btn:hover {
-  background: rgba(249, 115, 22, 0.15);
+  background: var(--bg-card-hover);
   border-color: var(--accent-orange);
 }
 
